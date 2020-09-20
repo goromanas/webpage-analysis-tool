@@ -13,6 +13,7 @@ function App() {
 
   const [url, setUrl] = useState('');
   const [uniqueTags, setUniqueTags] = useState([]);
+  const [mostPopularTag, setMostPopularTag] = useState();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -20,6 +21,7 @@ function App() {
     try {
       const response = await Axios.post('/url', { url: url }, { cancelToken: urlRequest.token });
       setUniqueTags(response.data.uniqueTags);
+      setMostPopularTag(response.data.mostPopularTag);
       console.log(response);
     } catch (e) {
       console.log("There was a problem or the request was cancelled.");
@@ -39,6 +41,7 @@ function App() {
       />
       <Tags
         uniqueTags={uniqueTags}
+        mostPopularTag={mostPopularTag}
       />
     </Container>
 

@@ -8,7 +8,10 @@ function Input({ handleSubmit, setUrl }) {
   return (
     <div className={inputStyles.inputwrapper}>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <TextField id="standard-basic" label="URL" onChange={(e) => setUrl(e.target.value)} />
+        <div className={inputStyles.inputrow}>
+          <div>http://</div>
+          <TextField id="standard-basic" label="URL" placeholder="delfi.lt" onChange={(e) => setUrl(e.target.value)} />
+        </div>
       </form>
     </div>
   )

@@ -14,6 +14,7 @@ app.post('/url', async function (req, res) {
   const divided = await splitHtml(source);
   const uniqueTags = getUniqueTags(divided);
   const mostPopularTag = getMostPopularTag(divided);
+  const longestPath = getLongestPath(uniqueTags, divided);
 
   res.status(200).json({
     'uniqueTags': uniqueTags,
@@ -45,12 +46,19 @@ function splitHtml(html) {
         return item + '>';
       }
     });
-    resolve(splitArray);
+
+    // clean comment tags
+
+    let outputArray = splitArray.map(item => {
+      if (item[1] + item[2] + item[3] === '!--') return item.substring(0, 4)
+      else return item;
+    })
+    resolve(outputArray);
   })
 }
 
 function getUniqueTags(array) {
-  return [...new Set(array)];
+  return [...new Set(array)].sort();
 }
 
 function getMostPopularTag(tags) {
@@ -59,7 +67,16 @@ function getMostPopularTag(tags) {
     return a;
   }, {});
   let maxCount = Math.max(...Object.values(counts));
-  return Object.keys(counts).filter(k => counts[k] === maxCount);
+  let tag = Object.keys(counts).filter(k => counts[k] === maxCount);
+  return { tag: tag, count: maxCount };
+}
+
+function getLongestPath(uniqueTags, html) {
+
+  // Prepare unique tags for check
+  const tags = uniqueTags.map(tag => tag.substring(0, tag.length - 1));
+
+  console.log(html);
 }
 
 app.listen(port, function () {

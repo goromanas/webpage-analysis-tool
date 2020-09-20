@@ -1,10 +1,11 @@
 import React from 'react';
+import MostPopularTag from './MostPopularTag/most-popular-tag';
 
 import SingleTag from './SingleTag/single-tag';
 
 import tagsStyles from './tags.module.scss';
 
-function Tags({ uniqueTags }) {
+function Tags({ uniqueTags, mostPopularTag }) {
   return (
     <>
       <h2>Unique tags used in document</h2>
@@ -16,6 +17,9 @@ function Tags({ uniqueTags }) {
           />
         ))}
       </div>
+      <MostPopularTag
+        mostPopularTag={mostPopularTag}
+      />
     </>
   )
 }

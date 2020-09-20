@@ -2,5 +2,19 @@
 
   &wrapper {
     display: block;
+    margin-top: 1rem;
+  }
+
+  &row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+
+    div {
+      padding-right: .2rem;
+      margin-bottom: -.5rem;
+    }
   }
 }
