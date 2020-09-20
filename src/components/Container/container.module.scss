@@ -1,6 +1,10 @@
+@import '../../styles/variables.scss';
+
 .container {
   margin: 0 auto;
-  width: 1140px;
+  width: $containerWidth;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }

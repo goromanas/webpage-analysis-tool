@@ -1,30 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextField } from '@material-ui/core';
-import Axios from 'axios';
 
-function Input() {
+import inputStyles from './input.module.scss';
 
-  const [url, setUrl] = useState('');
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const urlRequest = Axios.CancelToken.source();
-    try {
-      const response = await Axios.post('/url', { url: url }, { cancelToken: urlRequest.token });
-      console.log(response);
-    } catch (e) {
-      console.log("There was a problem or the request was cancelled.");
-    }
-
-    return () => {
-      urlRequest.cancel();
-    };
-  }
+function Input({ handleSubmit, setUrl }) {
 
   return (
-    <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-      <TextField id="standard-basic" label="URL" onChange={(e) => setUrl(e.target.value)} />
-    </form>
+    <div className={inputStyles.inputwrapper}>
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <TextField id="standard-basic" label="URL" onChange={(e) => setUrl(e.target.value)} />
+      </form>
+    </div>
   )
 }
 
